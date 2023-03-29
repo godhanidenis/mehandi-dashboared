@@ -1,0 +1,67 @@
+<div class="category-section">
+  <div class="tab-header">
+    <span>Category List</span>
+  </div>
+  <div class="table-layout">
+    <nz-table
+      id="tablerecords"
+      #nzTable
+      nzBordered
+      nzOuterBordered
+      [nzData]="listOfDisplayData"
+      nzTableLayout="fixed"
+      nzShowSizeChanger
+      [nzPageSizeOptions]="pageSizeOptions"
+      [nzFrontPagination]="false"
+      [nzTotal]="total"
+      [nzPageSize]="pageSize"
+      [nzPageIndex]="pageIndex"
+      [nzLoading]="isLoading"
+      (nzPageIndexChange)="pageIndexChange($event)"
+      (nzPageSizeChange)="pageSizeChange($event)"
+    >
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Name</th>
+          <th>No Of Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data; let no = index">
+          <td>{{ no + 1 }}</td>
+          <td>{{ data?.name }}</td>
+          <td>{{ data?.id }}</td>
+          <td>
+            <div class="action-button">
+              <button nz-button id="edit" (click)="dataAction('edit', data)">
+                <span nz-icon nzType="edit" nzTheme="fill"></span></button
+              ><br />
+              <button
+                nz-button
+                id="delete"
+                (click)="dataAction('delete', data)"
+              >
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <nz-modal
+      [nzStyle]="{ top: '20px' }"
+      [(nzVisible)]="editCategory"
+      nzTitle="Edit Category"
+      (nzOnCancel)="handleCancel()"
+    >
+      <div *nzModalContent>
+        <app-edit-category
+          [editDate]="editDate"
+          (closeModel)="handleCancel()"
+        ></app-edit-category>
+      </div>
+    </nz-modal>
+  </div>
+</div>

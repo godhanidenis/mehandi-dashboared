@@ -1,10 +1,26 @@
+import { CategoryComponent } from './pages/category/category.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { ProductsComponent } from './pages/products/products.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/category',
+  },
+  {
+    path: 'category',
+    component: CategoryComponent,
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

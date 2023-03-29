@@ -1,1 +1,124 @@
 /* You can add global styles to this file, and also import other style files */
+@import'./assets/variable/variable.scss';
+
+.tab-header {
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid $border;
+    // color: $teb-font-color;
+    padding: 0.50rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    height: 47px;
+}
+
+.ant-form-item {
+    margin-bottom: 8px !important;
+}
+
+.ant-card-body {
+    padding: 20px !important;
+}
+
+.ant-divider-horizontal.ant-divider-with-text {
+    margin: 10px 0 !important;
+}
+
+.ant-table-thead>tr>th,
+.ant-table-tbody>tr>td,
+.ant-table tfoot>tr>th,
+.ant-table tfoot>tr>td {
+    padding: 10px 16px !important;
+}
+
+.ant-table-pagination.ant-pagination {
+    margin: 10px 0 !important;
+}
+
+
+nz-table {
+    tr:nth-child(odd) {
+        background-color: $white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+
+    }
+}
+
+.action-button {
+    display: flex;
+
+    button {
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: 700;
+        // height: 25px !important;
+        padding: 0 10px !important;
+        max-width: fit-content;
+        margin: 0 5px;
+        border: none;
+        color: $theme-color;
+        // background-color: $yellow;
+    }
+
+    #edit:hover {
+        background-color: $active-btn;
+        color: $white;
+    }
+
+    #delete:hover {
+        background-color: $red;
+        color: $white;
+    }
+}
+
+// Model Footer
+.model-footer {
+    padding: 0.75rem 0;
+
+    .model-action {
+        padding-top: 10px;
+        border-top: 1px solid $border;
+        display: flex;
+        justify-content: end;
+
+        button {
+            // color: $white;
+            font-weight: 400;
+            border-radius: 4px;
+            padding: 3px 10px;
+            font-size: 1rem;
+            line-height: 1.5;
+            height: 40px !important;
+        }
+
+        // button:hover {
+        //     color: $white;
+        // }
+    }
+}
+
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: $white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $gray;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $gray;
+}

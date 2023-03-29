@@ -1,0 +1,37 @@
+<div class="product-section">
+  <div class="tab-header">
+    <span>Product List</span>
+  </div>
+  <div class="table-layout">
+    <nz-spin [nzSpinning]="isLoading" nzTip="Loading...">
+      <div nz-row [nzGutter]="16">
+        <div
+          class="gutter-row"
+          nz-col
+          [nzXs]="7"
+          [nzLg]="6"
+          [nzXl]="4"
+          *ngFor="let img of listOfDisplayProduct; let no = index"
+        >
+          <div class="image-box">
+            <img [src]="img?.url" width="100%" height="100%" />
+          </div>
+          <div class="document-action">
+            <a (click)="deleteImage(img)">
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nz-spin>
+    <div class="pagination">
+      <nz-pagination
+        [nzPageIndex]="pageIndex"
+        [nzTotal]="total"
+        [nzPageSizeOptions]="pageSizeOptions"
+        nzShowSizeChanger
+        [nzPageSize]="pageSize"
+      ></nz-pagination>
+    </div>
+  </div>
+</div>

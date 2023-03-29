@@ -1,0 +1,37 @@
+@import'../../../assets/variable/variable.scss';
+
+.category-section {
+    background: $white;
+    height: 100%;
+
+    .table-layout {
+        padding: 15px;
+    }
+
+    nz-table {
+        // input {
+        //     border-radius: 4px;
+        // }
+
+        td {
+            .contact {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+
+}
+
+::ng-deep .ant-modal-footer {
+    display: none !important;
+}
+
+::ng-deep .ant-modal-body {
+    padding: 20px !important;
+}
+
+::ng-deep .ant-modal-title {
+    font-size: 20px !important;
+}

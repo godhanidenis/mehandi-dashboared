@@ -1,0 +1,61 @@
+<div class="edit-category-section">
+  <form nz-form [formGroup]="editCategoryForm">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your name!">
+        <!-- <span style="color: red; font-weight: 500">*</span> -->
+        <label nzFor="name">Name :</label>
+        <nz-input-group>
+          <input
+            formControlName="name"
+            type="text"
+            nz-input
+            placeholder="Enter Category Name"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <label nzFor="logo">Logo :</label><br />
+        <div class="image">
+          <label>
+            <input type="file" class="hidden" (change)="filesChanged($event)" />
+            <div *ngIf="!logoImages">
+              <p>Add logo</p>
+              <span nz-icon nzType="upload" nzTheme="outline"></span>
+            </div>
+            <div class="showImage" *ngIf="logoImages">
+              <img [src]="logoImages" alt="Image logo" />
+            </div>
+          </label>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div class="model-footer">
+    <div class="model-action">
+      <button
+        nz-button
+        nzType="default"
+        style="color: black; margin-right: 5px"
+        (click)="handleCancel()"
+      >
+        Cancel
+      </button>
+      <button
+        nz-button
+        class="action-btn"
+        style="width: 60px"
+        (click)="submitForm()"
+      >
+        <div *ngIf="isLoading">
+          <ng-template #indicatorTemplate
+            ><span style="font-size: 16px" nz-icon nzType="loading"></span>
+          </ng-template>
+          <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+        </div>
+        <span *ngIf="!isLoading">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

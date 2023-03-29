@@ -1,0 +1,113 @@
+@import'../../../../assets/variable/variable.scss';
+
+.edit-category-section {
+
+    form {
+        width: 100%;
+        margin: auto;
+        padding: 0 2px;
+        max-height: 500px;
+        overflow-y: auto;
+
+        label {
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            padding-bottom: 2px;
+        }
+
+        ::ng-deep .ant-input-prefix {
+            font-size: x-large;
+            margin-right: 10px;
+        }
+
+        ::ng-deep .ant-input {
+            border-radius: 5px !important;
+        }
+
+        ::ng-deep .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+            border-radius: 5px !important;
+            height: 38px !important;
+        }
+
+        nz-input-group {
+            border-radius: 5px;
+
+            input {
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        .image {
+            width: 40%;
+            display: flex;
+            height: 150px;
+            border: 1px solid $lightgrey;
+            border-radius: 5px;
+            margin: 0 auto;
+
+            label {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 100%;
+                    height: 100%;
+                    color: $gray;
+
+                    p {
+                        font-weight: 700;
+                        font-size: 20px;
+                        margin: 0 auto;
+                    }
+
+                    mat-icon {
+                        justify-content: center;
+                        align-items: center;
+                        width: auto;
+                        font-size: 40px;
+                    }
+
+
+                }
+            }
+
+            .hidden {
+                display: none !important;
+            }
+
+            .showImage {
+                img {
+                    object-fit: cover !important;
+                    width: 100%;
+                    height: 100%;
+                    border: 1px solid $lightgrey;
+                    border-radius: 5px;
+                    position: relative;
+                }
+
+                button {
+                    border-radius: 50%;
+                    color: $red;
+                    margin-bottom: 55px;
+                    margin-left: 60px;
+                    width: 20px;
+                    height: 20px;
+                    position: absolute;
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+}

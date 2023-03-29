@@ -1,0 +1,54 @@
+@import'../../../assets/variable/variable.scss';
+
+.product-section {
+    background: $white;
+    height: 100%;
+
+    .table-layout {
+        padding: 15px;
+    }
+
+    nz-spin {
+        margin-top: 20px;
+    }
+
+    .gutter-row {
+        display: inline-grid;
+        padding: 8px !important;
+    }
+
+    .image-box {
+        position: relative;
+        height: 150px;
+        box-shadow: $section-shadow;
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    .document-action {
+        position: absolute;
+        display: flex;
+        justify-content: end;
+        width: 100%;
+        font-size: 18px;
+
+        a {
+            box-shadow: $img-shadow;
+            margin: 10px;
+            color: $black;
+            background: $white;
+            color: $red;
+            padding: 0 6px;
+            border-radius: 50%;
+        }
+    }
+
+    .pagination {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        margin-top: 10px;
+    }
+}
