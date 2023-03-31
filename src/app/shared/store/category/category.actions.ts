@@ -10,3 +10,20 @@ export const getCategoryFail = createAction(
   '[GET Category] Fail',
   props<{ errorMessage: string }>()
 );
+
+//! EDIT Category
+export const updateCategoryStart = createAction(
+  '[EDIT Category] Start',
+  props<{
+    requestParams: any;
+    requestBody: any;
+  }>()
+);
+export const updateCategorySuccess = createAction(
+  '[EDIT Category] Success',
+  props<{ payload: any }>()
+);
+export const updateCategoryFail = createAction(
+  '[EDIT Category] Fail',
+  props<{ errorMessage: string }>()
+);

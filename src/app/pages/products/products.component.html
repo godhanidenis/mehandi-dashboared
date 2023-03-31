@@ -3,6 +3,21 @@
     <span>Product List</span>
   </div>
   <div class="table-layout">
+    <div class="search">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please select your location area!">
+          <nz-select nzPlaceHolder="Select Category">
+            <nz-option nzValue="" nzLabel="Select Category Type"></nz-option>
+            <nz-option
+              *ngFor="let residence of listOfCategoryData"
+              [nzValue]="residence?.id"
+              [nzLabel]="residence?.name"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <button nz-button nzType="primary">Search</button>
+    </div>
     <nz-spin [nzSpinning]="isLoading" nzTip="Loading...">
       <div nz-row [nzGutter]="16">
         <div

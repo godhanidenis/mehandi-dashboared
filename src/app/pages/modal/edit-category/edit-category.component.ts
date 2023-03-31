@@ -9,6 +9,9 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Category } from 'src/app/shared/utils/category';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/reducers';
+import { getCategoryStart } from 'src/app/shared/store/category/category.actions';
 
 @Component({
   selector: 'app-edit-category',
@@ -27,7 +30,8 @@ export class EditCategoryComponent implements OnInit {
 
   constructor(
     private cd: ChangeDetectorRef,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -51,15 +55,26 @@ export class EditCategoryComponent implements OnInit {
 
   submitForm() {
     // this.isLoading = true;
-    const updateDate = {
+    const updateDate: any = {
       name: this.editCategoryForm.value.name,
     };
+    // if (this.imageFile) {
+    //   updateDate['logo'] = this.imageFile;
+    // }
     this.categoryService
       .updateCategory(this.editDate?.id, updateDate)
-      .subscribe((res: any) => {
-        console.log('updateCategory:::::', res);
-        this.handleCancel();
-      });
+      .subscribe(
+        (res: any) => {
+          // this.isLoading = false;
+          console.log('updateCategory:::::', res);
+          this.store.dispatch(getCategoryStart());
+          this.handleCancel();
+        },
+        (err) => {
+          // this.isLoading = false;
+          this.handleCancel();
+        }
+      );
   }
 
   handleCancel() {

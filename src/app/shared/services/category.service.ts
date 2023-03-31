@@ -22,21 +22,17 @@ export class CategoryService {
     // {
     //     params: params,
     //   }
-    return this.httpClient.get(
-      'http://mahendibackend-env.eba-3d3vtnhx.us-east-2.elasticbeanstalk.com/api/allCategories/'
-    );
+    return this.httpClient.get(environment.url + 'categories/');
   }
 
   updateCategory(id: any, updateCategory: any) {
     return this.httpClient.put(
-      'http://mahendibackend-env.eba-3d3vtnhx.us-east-2.elasticbeanstalk.com/api/categories/' +
-        id +
-        '/',
+      environment.url + 'categories/' + id + '/',
       updateCategory
     );
   }
 
-  // deleteUser(id: any) {
-  //   return this.httpClient.delete(environment.baseUrl + '/appuser/' + id);
-  // }
+  deleteCategory(id: any) {
+    return this.httpClient.delete(environment.url + 'categories/' + id + '/');
+  }
 }

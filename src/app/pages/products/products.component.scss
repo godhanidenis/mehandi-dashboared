@@ -9,7 +9,45 @@
     }
 
     nz-spin {
-        margin-top: 20px;
+        margin-top: 25px;
+    }
+
+    .search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        nz-form-item {
+            width: 500px;
+        }
+
+        ::ng-deep .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+            border-radius: 5px !important;
+            height: 35px !important;
+        }
+
+        nz-input-group {
+            border-radius: 5px;
+
+            input {
+                height: 35px;
+                font-size: 16px;
+            }
+        }
+
+        button {
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+
+        ::ng-deep .ant-input-prefix {
+            font-size: x-large;
+            margin-right: 10px;
+        }
+
+        ::ng-deep .ant-input {
+            border-radius: 5px !important;
+        }
     }
 
     .gutter-row {
@@ -37,11 +75,17 @@
         a {
             box-shadow: $img-shadow;
             margin: 10px;
-            color: $black;
             background: $white;
             color: $red;
             padding: 0 6px;
             border-radius: 50%;
+        }
+    }
+
+    .document-action {
+        a:hover {
+            background: $red;
+            color: $white;
         }
     }
 

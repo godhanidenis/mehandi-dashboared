@@ -10,8 +10,6 @@ export class ProductService {
   constructor(private httpClient: HttpClient) {}
 
   getAllProduct() {
-    return this.httpClient.get(
-      'http://mahendibackend-env.eba-3d3vtnhx.us-east-2.elasticbeanstalk.com/api/allDesigns/'
-    );
+    return this.httpClient.get(environment.url + 'allDesigns/');
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { AppState } from 'src/app/reducers';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { getCategoryStart } from 'src/app/shared/store/category/category.actions';
 import { categorySelectors } from 'src/app/shared/store/category/category.selectors';
 import { Category } from 'src/app/shared/utils/category';
 
@@ -22,7 +24,11 @@ export class CategoryComponent implements OnInit {
   confirmModal?: NzModalRef;
   editDate: Category | undefined;
 
-  constructor(private modal: NzModalService, private store: Store<AppState>) {}
+  constructor(
+    private modal: NzModalService,
+    private store: Store<AppState>,
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.loadCategory();
@@ -60,9 +66,15 @@ export class CategoryComponent implements OnInit {
         nzTitle: 'Do you Want to delete these items?',
         nzContent: 'When clicked the OK button, this item was delete.',
         nzOnOk: async () =>
-          await new Promise<void>((resolve, reject) => {}).catch(() =>
-            console.log('Oops errors!')
-          ),
+          await new Promise<void>((resolve, reject) => {
+            resolve();
+            this.categoryService
+              .deleteCategory(record?.id)
+              .subscribe((res: any) => {
+                console.log('deleteCategory::::', res);
+                this.store.dispatch(getCategoryStart());
+              });
+          }).catch(() => console.log('Oops errors!')),
       });
     }
   }

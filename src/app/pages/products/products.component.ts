@@ -3,7 +3,9 @@ import { Store } from '@ngrx/store';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { AppState } from 'src/app/reducers';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { categorySelectors } from 'src/app/shared/store/category/category.selectors';
 import { productSelectors } from 'src/app/shared/store/product/product.selectors';
+import { Category } from 'src/app/shared/utils/category';
 import { Products } from 'src/app/shared/utils/products';
 
 @Component({
@@ -21,8 +23,19 @@ export class ProductsComponent implements OnInit {
   pageSizeOptions = [5, 10, 15, 20];
   editCategory: boolean = false;
   confirmModal?: NzModalRef;
+  listOfCategory: any[] = [];
+  listOfCategoryData = [...this.listOfCategory];
 
-  constructor(private modal: NzModalService, private store: Store<AppState>) {}
+  constructor(private modal: NzModalService, private store: Store<AppState>) {
+    store.select(categorySelectors).subscribe((res: any) => {
+      if (!res.errorMessage) {
+        if (!res.isLoading) {
+          this.listOfCategory = res?.data?.results;
+          this.listOfCategoryData = [...this.listOfCategory];
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadProducts();
