@@ -10,16 +10,13 @@
       nzOuterBordered
       [nzData]="listOfDisplayData"
       nzTableLayout="fixed"
-      nzShowSizeChanger
-      [nzPageSizeOptions]="pageSizeOptions"
       [nzFrontPagination]="false"
       [nzTotal]="total"
-      [nzPageSize]="pageSize"
       [nzPageIndex]="pageIndex"
       [nzLoading]="isLoading"
       (nzPageIndexChange)="pageIndexChange($event)"
-      (nzPageSizeChange)="pageSizeChange($event)"
     >
+      <!-- [nzPageSize]="pageSize" [nzPageSizeOptions]="pageSizeOptions" nzShowSizeChanger (nzPageSizeChange)="pageSizeChange($event)"-->
       <thead>
         <tr>
           <th>No</th>

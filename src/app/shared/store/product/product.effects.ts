@@ -8,12 +8,34 @@ import { ProductService } from '../../services/product.service';
 
 @Injectable()
 export class ProductEffects {
-  // GET User Type Effect
+  // GETAll User Type Effect
+  getAllProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromUsers.getAllProductStart),
+      switchMap((action) =>
+        this.productService.getAllProduct(action.payload).pipe(
+          map((res: any) =>
+            fromUsers.getAllProductSuccess({
+              payload: res?.data?.results,
+            })
+          ),
+          catchError((err: HttpErrorResponse) =>
+            of(
+              fromUsers.getAllProductFail({
+                errorMessage: err.error.message,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   getProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromUsers.getProductStart),
-      switchMap(() =>
-        this.productService.getAllProduct().pipe(
+      switchMap((action) =>
+        this.productService.getProduct(action.payload).pipe(
           map((res: any) =>
             fromUsers.getProductSuccess({
               payload: res?.data?.results,

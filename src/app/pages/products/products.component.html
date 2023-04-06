@@ -6,8 +6,8 @@
     <div class="search">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please select your location area!">
-          <nz-select nzPlaceHolder="Select Category">
-            <nz-option nzValue="" nzLabel="Select Category Type"></nz-option>
+          <nz-select [(ngModel)]="searchValue" nzPlaceHolder="Select Category">
+            <nz-option [nzValue]="0" nzLabel="All Category"></nz-option>
             <nz-option
               *ngFor="let residence of listOfCategoryData"
               [nzValue]="residence?.id"
@@ -16,7 +16,9 @@
           </nz-select>
         </nz-form-control>
       </nz-form-item>
-      <button nz-button nzType="primary">Search</button>
+      <button nz-button nzType="primary" (click)="filterFunction()">
+        Search
+      </button>
     </div>
     <nz-spin [nzSpinning]="isLoading" nzTip="Loading...">
       <div nz-row [nzGutter]="16">
@@ -41,11 +43,9 @@
     </nz-spin>
     <div class="pagination">
       <nz-pagination
-        [nzPageIndex]="pageIndex"
         [nzTotal]="total"
-        [nzPageSizeOptions]="pageSizeOptions"
-        nzShowSizeChanger
-        [nzPageSize]="pageSize"
+        [nzPageIndex]="pageIndex"
+        (nzPageIndexChange)="pageIndexChange($event)"
       ></nz-pagination>
     </div>
   </div>

@@ -9,7 +9,27 @@ import { environment } from 'src/environments/environment';
 export class ProductService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllProduct() {
-    return this.httpClient.get(environment.url + 'allDesigns/');
+  getAllProduct(action: any) {
+    let params = new HttpParams()
+      //   .set('record', action?.record)
+      .set('page', action?.page);
+
+    return this.httpClient.get(environment.url + 'allproducts/', {
+      params: params,
+    });
+  }
+
+  getProduct(action: any) {
+    let params = new HttpParams()
+      .set('page', action?.page)
+      .set('category_id', action?.category_id);
+
+    return this.httpClient.get(environment.url + 'products/', {
+      params: params,
+    });
+  }
+
+  deleteProduct(id: any) {
+    return this.httpClient.delete(environment.url + 'products/' + id + '/');
   }
 }

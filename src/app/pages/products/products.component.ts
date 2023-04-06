@@ -4,6 +4,10 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { AppState } from 'src/app/reducers';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { categorySelectors } from 'src/app/shared/store/category/category.selectors';
+import {
+  getAllProductStart,
+  getProductStart,
+} from 'src/app/shared/store/product/product.actions';
 import { productSelectors } from 'src/app/shared/store/product/product.selectors';
 import { Category } from 'src/app/shared/utils/category';
 import { Products } from 'src/app/shared/utils/products';
@@ -25,8 +29,13 @@ export class ProductsComponent implements OnInit {
   confirmModal?: NzModalRef;
   listOfCategory: any[] = [];
   listOfCategoryData = [...this.listOfCategory];
+  searchValue: number = 0;
 
-  constructor(private modal: NzModalService, private store: Store<AppState>) {
+  constructor(
+    private modal: NzModalService,
+    private store: Store<AppState>,
+    private productService: ProductService
+  ) {
     store.select(categorySelectors).subscribe((res: any) => {
       if (!res.errorMessage) {
         if (!res.isLoading) {
@@ -47,6 +56,7 @@ export class ProductsComponent implements OnInit {
       this.isLoading = res.isLoading;
       // this.pageSize = res?.record;
       // this.pageIndex = res?.page;
+      this.total = res?.data?.count;
       if (!res.errorMessage) {
         if (!res.isLoading) {
           this.listOfProduct = res?.data?.results;
@@ -56,14 +66,50 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  pageIndexChange(params: number): void {
+    this.pageIndex = params;
+    this.dispatchFunction(this.searchValue);
+  }
+
+  filterFunction() {
+    this.pageIndex = 1;
+    this.dispatchFunction(this.searchValue);
+  }
+
   deleteImage(data: any) {
     this.confirmModal = this.modal.confirm({
       nzTitle: 'Do you Want to delete these items?',
       nzContent: 'When clicked the OK button, this item was delete.',
       nzOnOk: async () =>
-        await new Promise<void>((resolve, reject) => {}).catch(() =>
-          console.log('Oops errors!')
-        ),
+        await new Promise<void>((resolve, reject) => {
+          this.productService.deleteProduct(data?.id).subscribe((res: any) => {
+            resolve();
+            this.dispatchFunction(this.searchValue);
+          });
+        }).catch(() => {
+          console.log('Oops errors!');
+        }),
     });
+  }
+
+  dispatchFunction(id: number) {
+    if (id === 0) {
+      this.store.dispatch(
+        getAllProductStart({
+          payload: {
+            page: this.pageIndex,
+          },
+        })
+      );
+    } else {
+      this.store.dispatch(
+        getProductStart({
+          payload: {
+            category_id: id,
+            page: this.pageIndex,
+          },
+        })
+      );
+    }
   }
 }

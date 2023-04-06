@@ -19,7 +19,25 @@ const initialProfileState: ProductState = {
 export const ProductReducer = createReducer(
   initialProfileState,
 
-  // ! GET User Type
+  // ! GET All Products
+  on(fromUsers.getAllProductStart, (state: any) => ({
+    ...state,
+    isLoading: true,
+    errorMessage: null,
+  })),
+  on(fromUsers.getAllProductSuccess, (state: any, { payload }) => ({
+    ...state,
+    isLoading: false,
+    errorMessage: null,
+    data: payload,
+  })),
+  on(fromUsers.getAllProductFail, (state: any, { errorMessage }) => ({
+    ...state,
+    isLoading: false,
+    errorMessage: errorMessage,
+  })),
+
+  // ! GET Products
   on(fromUsers.getProductStart, (state: any) => ({
     ...state,
     isLoading: true,

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './reducers';
 import { getCategoryStart } from './shared/store/category/category.actions';
-import { getProductStart } from './shared/store/product/product.actions';
+import { getAllProductStart } from './shared/store/product/product.actions';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,12 @@ export class AppComponent {
 
   constructor(private store: Store<AppState>) {
     store.dispatch(getCategoryStart());
-    store.dispatch(getProductStart());
+    store.dispatch(
+      getAllProductStart({
+        payload: {
+          page: 1,
+        },
+      })
+    );
   }
 }
