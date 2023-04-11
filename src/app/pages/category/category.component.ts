@@ -5,7 +5,7 @@ import { AppState } from 'src/app/reducers';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { getCategoryStart } from 'src/app/shared/store/category/category.actions';
 import { categorySelectors } from 'src/app/shared/store/category/category.selectors';
-import { Category } from 'src/app/shared/utils/category';
+import { Category, Response } from 'src/app/shared/utils/category';
 
 @Component({
   selector: 'app-category',
@@ -43,7 +43,7 @@ export class CategoryComponent implements OnInit {
   }
 
   loadCategory() {
-    this.store.select(categorySelectors).subscribe((res: any) => {
+    this.store.select(categorySelectors).subscribe((res: Response) => {
       // console.log('getAllCategories:::', res);
       this.isLoading = res.isLoading;
       // this.pageSize = res?.record;

@@ -18,6 +18,7 @@ export class AppComponent {
       getAllProductStart({
         payload: {
           page: 1,
+          filter: 0,
         },
       })
     );

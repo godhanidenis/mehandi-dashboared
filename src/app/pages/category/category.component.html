@@ -19,7 +19,8 @@
       <!-- [nzPageSize]="pageSize" [nzPageSizeOptions]="pageSizeOptions" nzShowSizeChanger (nzPageSizeChange)="pageSizeChange($event)"-->
       <thead>
         <tr>
-          <th>No</th>
+          <th style="width: 60px">No</th>
+          <th style="display: flex; justify-content: center">Category Logo</th>
           <th>Name</th>
           <th>No Of Category</th>
           <th>Actions</th>
@@ -28,7 +29,12 @@
       <tbody>
         <tr *ngFor="let data of nzTable.data; let no = index">
           <td>{{ no + 1 }}</td>
-          <td>{{ data?.name }}</td>
+          <td style="display: flex; justify-content: center">
+            <div class="image-box">
+              <img [src]="data?.logos3" width="100%" height="100%" />
+            </div>
+          </td>
+          <td>{{ data?.alias_name }}</td>
           <td>{{ data?.id }}</td>
           <td>
             <div class="action-button">

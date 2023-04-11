@@ -9,7 +9,7 @@ import {
   getProductStart,
 } from 'src/app/shared/store/product/product.actions';
 import { productSelectors } from 'src/app/shared/store/product/product.selectors';
-import { Category } from 'src/app/shared/utils/category';
+import { Category, Response } from 'src/app/shared/utils/category';
 import { Products } from 'src/app/shared/utils/products';
 
 @Component({
@@ -27,7 +27,7 @@ export class ProductsComponent implements OnInit {
   pageSizeOptions = [5, 10, 15, 20];
   editCategory: boolean = false;
   confirmModal?: NzModalRef;
-  listOfCategory: any[] = [];
+  listOfCategory: Category[] = [];
   listOfCategoryData = [...this.listOfCategory];
   searchValue: number = 0;
 
@@ -36,7 +36,7 @@ export class ProductsComponent implements OnInit {
     private store: Store<AppState>,
     private productService: ProductService
   ) {
-    store.select(categorySelectors).subscribe((res: any) => {
+    store.select(categorySelectors).subscribe((res: Response) => {
       if (!res.errorMessage) {
         if (!res.isLoading) {
           this.listOfCategory = res?.data?.results;
@@ -55,7 +55,8 @@ export class ProductsComponent implements OnInit {
       console.log('productSelectors:::', res);
       this.isLoading = res.isLoading;
       // this.pageSize = res?.record;
-      // this.pageIndex = res?.page;
+      this.pageIndex = res?.filter?.page;
+      this.searchValue = res?.filter?.filter;
       this.total = res?.data?.count;
       if (!res.errorMessage) {
         if (!res.isLoading) {
@@ -98,6 +99,7 @@ export class ProductsComponent implements OnInit {
         getAllProductStart({
           payload: {
             page: this.pageIndex,
+            filter: id,
           },
         })
       );
@@ -107,6 +109,7 @@ export class ProductsComponent implements OnInit {
           payload: {
             category_id: id,
             page: this.pageIndex,
+            filter: id,
           },
         })
       );

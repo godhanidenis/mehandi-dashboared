@@ -31,7 +31,7 @@
           *ngFor="let img of listOfDisplayProduct; let no = index"
         >
           <div class="image-box">
-            <img [src]="img?.url" width="100%" height="100%" />
+            <img [src]="img?.urls3" width="100%" height="100%" />
           </div>
           <div class="document-action">
             <a (click)="deleteImage(img)">
@@ -41,6 +41,9 @@
         </div>
       </div>
     </nz-spin>
+    <nz-empty
+      *ngIf="listOfDisplayProduct.length === 0 && !isLoading"
+    ></nz-empty>
     <div class="pagination">
       <nz-pagination
         [nzTotal]="total"

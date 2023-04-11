@@ -11,7 +11,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Category } from 'src/app/shared/utils/category';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
-import { getCategoryStart } from 'src/app/shared/store/category/category.actions';
+import {
+  getCategoryStart,
+  updateCategoryStart,
+} from 'src/app/shared/store/category/category.actions';
 
 @Component({
   selector: 'app-edit-category',
@@ -39,7 +42,10 @@ export class EditCategoryComponent implements OnInit {
       name: new FormControl(''),
     });
     setTimeout(() => {
-      this.editCategoryForm.controls['name'].setValue(this.editDate?.name);
+      this.editCategoryForm.controls['name'].setValue(
+        this.editDate?.alias_name
+      );
+      this.logoImages = this.editDate?.logos3;
     }, 100);
   }
 
@@ -54,27 +60,19 @@ export class EditCategoryComponent implements OnInit {
   }
 
   submitForm() {
-    // this.isLoading = true;
-    const updateDate: any = {
-      name: this.editCategoryForm.value.name,
-    };
-    // if (this.imageFile) {
-    //   updateDate['logo'] = this.imageFile;
-    // }
-    this.categoryService
-      .updateCategory(this.editDate?.id, updateDate)
-      .subscribe(
-        (res: any) => {
-          // this.isLoading = false;
-          console.log('updateCategory:::::', res);
-          this.store.dispatch(getCategoryStart());
-          this.handleCancel();
-        },
-        (err) => {
-          // this.isLoading = false;
-          this.handleCancel();
-        }
-      );
+    const formData = new FormData();
+    formData.append('alias_name', this.editCategoryForm.value.name);
+    if (this.imageFile) {
+      formData.append('file', this.imageFile);
+    }
+
+    this.store.dispatch(
+      updateCategoryStart({
+        requestParams: this.editDate?.id,
+        requestBody: formData,
+      })
+    );
+    this.handleCancel();
   }
 
   handleCancel() {

@@ -40,7 +40,7 @@ export class CategoryEffects {
         this.categoryService.updateCategory(requestParams, requestBody).pipe(
           map((res: any) =>
             fromCategory.updateCategorySuccess({
-              payload: res,
+              payload: res.data,
             })
           ),
           catchError((err: HttpErrorResponse) =>

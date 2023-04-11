@@ -8,20 +8,23 @@ export interface ProductState {
   data: any;
   errorMessage: string;
   isLoading: boolean;
+  filter: number;
 }
 
 const initialProfileState: ProductState = {
   data: [],
   errorMessage: '',
   isLoading: false,
+  filter: 0,
 };
 
 export const ProductReducer = createReducer(
   initialProfileState,
 
   // ! GET All Products
-  on(fromUsers.getAllProductStart, (state: any) => ({
+  on(fromUsers.getAllProductStart, (state: any, { payload }) => ({
     ...state,
+    filter: { ...state.filter, ...payload },
     isLoading: true,
     errorMessage: null,
   })),
@@ -38,8 +41,9 @@ export const ProductReducer = createReducer(
   })),
 
   // ! GET Products
-  on(fromUsers.getProductStart, (state: any) => ({
+  on(fromUsers.getProductStart, (state: any, { payload }) => ({
     ...state,
+    filter: { ...state.filter, ...payload },
     isLoading: true,
     errorMessage: null,
   })),

@@ -19,6 +19,18 @@
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
+
+            .image-box {
+                height: 50px;
+                width: 50px;
+                border-radius: 5px;
+                box-shadow: $section-shadow;
+
+                img {
+                    border-radius: 5px;
+                    object-fit: cover;
+                }
+            }
         }
     }
 
