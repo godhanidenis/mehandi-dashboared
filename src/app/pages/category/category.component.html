@@ -12,11 +12,14 @@
       nzTableLayout="fixed"
       [nzFrontPagination]="false"
       [nzTotal]="total"
-      [nzPageIndex]="pageIndex"
       [nzLoading]="isLoading"
+      [nzPageIndex]="pageIndex"
+      [nzPageSize]="pageSize"
+      nzShowSizeChanger
+      [nzPageSizeOptions]="pageSizeOptions"
       (nzPageIndexChange)="pageIndexChange($event)"
+      (nzPageSizeChange)="pageSizeChange($event)"
     >
-      <!-- [nzPageSize]="pageSize" [nzPageSizeOptions]="pageSizeOptions" nzShowSizeChanger (nzPageSizeChange)="pageSizeChange($event)"-->
       <thead>
         <tr>
           <th style="width: 60px">No</th>

@@ -48,7 +48,11 @@
       <nz-pagination
         [nzTotal]="total"
         [nzPageIndex]="pageIndex"
+        [nzPageSize]="pageSize"
+        nzShowSizeChanger
+        [nzPageSizeOptions]="pageSizeOptions"
         (nzPageIndexChange)="pageIndexChange($event)"
+        (nzPageSizeChange)="pageSizeChange($event)"
       ></nz-pagination>
     </div>
   </div>

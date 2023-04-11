@@ -20,7 +20,8 @@ export const CategoryReducer = createReducer(
   initialProfileState,
 
   // ! GET User Type
-  on(fromCategory.getCategoryStart, (state: any) => ({
+  on(fromCategory.getCategoryStart, (state: any, { payload }) => ({
+    filter: { ...state.filter, ...payload },
     ...state,
     isLoading: true,
     errorMessage: null,

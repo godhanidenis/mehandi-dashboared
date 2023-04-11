@@ -15,14 +15,14 @@ export interface CustomerMessage {
 export class CategoryService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllCategory() {
-    // let params = new HttpParams()
-    //   .set('record', action?.record)
-    //   .set('page', action?.page);
-    // {
-    //     params: params,
-    //   }
-    return this.httpClient.get(environment.url + 'categories/');
+  getAllCategory(action: any) {
+    let params = new HttpParams()
+      .set('page_size', action?.page_size)
+      .set('page', action?.page);
+
+    return this.httpClient.get(environment.url + 'categories/', {
+      params: params,
+    });
   }
 
   updateCategory(id: any, updateCategory: any) {

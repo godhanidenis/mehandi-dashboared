@@ -10,6 +10,6 @@ export class Category {
 export class Response {
   data?: any;
   errorMessage?: string;
-  filter?: { page: number; filter: number };
+  filter?: { page: number; page_size: number };
   isLoading!: boolean;
 }

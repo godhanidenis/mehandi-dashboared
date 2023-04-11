@@ -36,18 +36,21 @@ export class CategoryComponent implements OnInit {
 
   pageSizeChange(params: number): void {
     this.pageSize = params;
+    this.getRequest();
   }
 
   pageIndexChange(params: number): void {
     this.pageIndex = params;
+    this.getRequest();
   }
 
   loadCategory() {
     this.store.select(categorySelectors).subscribe((res: Response) => {
-      // console.log('getAllCategories:::', res);
+      console.log('getAllCategories:::', res);
       this.isLoading = res.isLoading;
-      // this.pageSize = res?.record;
-      // this.pageIndex = res?.page;
+      this.pageIndex = res?.filter?.page ? res?.filter?.page : 1;
+      this.pageSize = res?.filter?.page_size ? res?.filter?.page_size : 10;
+      this.total = res?.data?.count;
       if (!res.errorMessage) {
         if (!res.isLoading) {
           this.listOfData = res?.data?.results;
@@ -72,11 +75,22 @@ export class CategoryComponent implements OnInit {
               .deleteCategory(record?.id)
               .subscribe((res: any) => {
                 console.log('deleteCategory::::', res);
-                this.store.dispatch(getCategoryStart());
+                this.getRequest();
               });
           }).catch(() => console.log('Oops errors!')),
       });
     }
+  }
+
+  getRequest() {
+    this.store.dispatch(
+      getCategoryStart({
+        payload: {
+          page: this.pageIndex,
+          page_size: this.pageSize,
+        },
+      })
+    );
   }
 
   handleCancel() {

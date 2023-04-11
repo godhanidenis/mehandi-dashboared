@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
 //! GET Category
-export const getCategoryStart = createAction('[GET Category] Start');
+export const getCategoryStart = createAction(
+  '[GET Category] Start',
+  props<{ payload: any }>()
+);
 export const getCategorySuccess = createAction(
   '[GET Category] Success',
   props<{ payload: any }>()

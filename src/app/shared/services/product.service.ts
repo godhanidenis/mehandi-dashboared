@@ -11,7 +11,7 @@ export class ProductService {
 
   getAllProduct(action: any) {
     let params = new HttpParams()
-      //   .set('record', action?.record)
+      .set('page_size', action?.page_size)
       .set('page', action?.page);
 
     return this.httpClient.get(environment.url + 'allproducts/', {

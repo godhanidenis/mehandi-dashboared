@@ -13,11 +13,19 @@ export class AppComponent {
   isCollapsed = false;
 
   constructor(private store: Store<AppState>) {
-    store.dispatch(getCategoryStart());
+    store.dispatch(
+      getCategoryStart({
+        payload: {
+          page: 1,
+          page_size: 10,
+        },
+      })
+    );
     store.dispatch(
       getAllProductStart({
         payload: {
           page: 1,
+          page_size: 12,
           filter: 0,
         },
       })

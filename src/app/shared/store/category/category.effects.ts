@@ -12,8 +12,8 @@ export class CategoryEffects {
   getCategory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromCategory.getCategoryStart),
-      switchMap(() =>
-        this.categoryService.getAllCategory().pipe(
+      switchMap((action) =>
+        this.categoryService.getAllCategory(action.payload).pipe(
           map((res: any) =>
             fromCategory.getCategorySuccess({
               payload: res?.data?.results,

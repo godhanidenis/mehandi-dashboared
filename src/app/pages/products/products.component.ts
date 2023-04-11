@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit {
   total = 1;
   pageSize = 10;
   pageIndex = 1;
-  pageSizeOptions = [5, 10, 15, 20];
+  pageSizeOptions = [6, 12, 18, 24];
   editCategory: boolean = false;
   confirmModal?: NzModalRef;
   listOfCategory: Category[] = [];
@@ -52,9 +52,8 @@ export class ProductsComponent implements OnInit {
 
   loadProducts() {
     this.store.select(productSelectors).subscribe((res: any) => {
-      console.log('productSelectors:::', res);
       this.isLoading = res.isLoading;
-      // this.pageSize = res?.record;
+      this.pageSize = res?.filter?.page_size;
       this.pageIndex = res?.filter?.page;
       this.searchValue = res?.filter?.filter;
       this.total = res?.data?.count;
@@ -69,6 +68,11 @@ export class ProductsComponent implements OnInit {
 
   pageIndexChange(params: number): void {
     this.pageIndex = params;
+    this.dispatchFunction(this.searchValue);
+  }
+
+  pageSizeChange(params: number): void {
+    this.pageSize = params;
     this.dispatchFunction(this.searchValue);
   }
 
@@ -99,6 +103,7 @@ export class ProductsComponent implements OnInit {
         getAllProductStart({
           payload: {
             page: this.pageIndex,
+            page_size: this.pageSize,
             filter: id,
           },
         })
@@ -109,6 +114,7 @@ export class ProductsComponent implements OnInit {
           payload: {
             category_id: id,
             page: this.pageIndex,
+            page_size: this.pageSize,
             filter: id,
           },
         })
