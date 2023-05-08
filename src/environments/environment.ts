@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://mahendibackend-env.eba-3d3vtnhx.us-east-2.elasticbeanstalk.com/api/',
+  url: 'https://mahendibackend-env.eba-3d3vtnhx.us-east-2.elasticbeanstalk.com/api/',
 };
 
 /*
