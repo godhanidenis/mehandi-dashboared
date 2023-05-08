@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 export interface CustomerMessage {
@@ -22,6 +22,8 @@ export class CategoryService {
 
     return this.httpClient.get(environment.url + 'categories/', {
       params: params,
+      headers: new HttpHeaders(
+        { 'rejectUnauthorized': 'false' })
     });
   }
 
