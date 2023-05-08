@@ -14,7 +14,7 @@ export class ProductService {
       .set('page_size', action?.page_size)
       .set('page', action?.page);
 
-    return this.httpClient.get(environment.url + 'allproducts/', {
+    return this.httpClient.get('/api/allproducts/', {
       params: params,
     });
   }
@@ -24,12 +24,12 @@ export class ProductService {
       .set('page', action?.page)
       .set('category_id', action?.category_id);
 
-    return this.httpClient.get(environment.url + 'products/', {
+    return this.httpClient.get('/api/products/', {
       params: params,
     });
   }
 
   deleteProduct(id: any) {
-    return this.httpClient.delete(environment.url + 'products/' + id + '/');
+    return this.httpClient.delete('/api/products/' + id + '/');
   }
 }

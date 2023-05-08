@@ -20,21 +20,19 @@ export class CategoryService {
       .set('page_size', action?.page_size)
       .set('page', action?.page);
 
-    return this.httpClient.get(environment.url + 'categories/', {
+    return this.httpClient.get('/api/categories/', {
       params: params,
-      headers: new HttpHeaders(
-        { 'rejectUnauthorized': 'false' })
     });
   }
 
   updateCategory(id: any, updateCategory: any) {
     return this.httpClient.put(
-      environment.url + 'categories/' + id + '/',
+      '/api/categories/' + id + '/',
       updateCategory
     );
   }
 
   deleteCategory(id: any) {
-    return this.httpClient.delete(environment.url + 'categories/' + id + '/');
+    return this.httpClient.delete('/api/categories/' + id + '/');
   }
 }
